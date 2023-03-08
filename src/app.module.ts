@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
+import { FavController } from './fav.controller';
 import { AppService } from './app.service';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Counter } from './model/counter.model';
+import { Favorite } from './model/favorite.model';
 
 @Module({
   imports: [
@@ -10,11 +12,11 @@ import { Counter } from './model/counter.model';
       dialect: 'sqlite',
       autoLoadModels: true,
       synchronize: true,
-      models: [Counter],
+      models: [Counter, Favorite],
     }),
-    SequelizeModule.forFeature([Counter])
+    SequelizeModule.forFeature([Counter, Favorite]),
   ],
-  controllers: [AppController],
+  controllers: [AppController, FavController],
   providers: [AppService],
 })
 export class AppModule {}
